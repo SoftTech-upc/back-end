@@ -1,11 +1,13 @@
-package com.go2climb.app.service.model.entity;
+package com.go2climb.app.tour.model.entity;
 
+import com.go2climb.app.activity.domain.model.entity.Activity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Getter
@@ -59,4 +61,7 @@ public class Tour {
 
     @Column(name = "is_offer", nullable = false)
     private Boolean isOffer;
+
+    @OneToMany(mappedBy = "tour")
+    private ArrayList<Activity> activities;
 }
