@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "tourists")
 public class Tourist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
