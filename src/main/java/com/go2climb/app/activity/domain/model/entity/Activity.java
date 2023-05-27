@@ -1,6 +1,5 @@
 package com.go2climb.app.activity.domain.model.entity;
 
-import com.go2climb.app.agency.model.entity.Agency;
 import com.go2climb.app.tour.model.entity.Tour;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
