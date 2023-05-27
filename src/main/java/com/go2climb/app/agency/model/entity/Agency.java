@@ -1,6 +1,5 @@
 package com.go2climb.app.agency.model.entity;
 
-import com.go2climb.app.service.model.entity.Service;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
