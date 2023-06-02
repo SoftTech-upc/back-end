@@ -1,4 +1,4 @@
-package com.go2climb.app.agency.model.entity;
+package com.go2climb.app.agency.domain.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
