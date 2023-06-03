@@ -1,6 +1,6 @@
 package com.go2climb.app.activity.domain.model.entity;
 
-import com.go2climb.app.tour.model.entity.Tour;
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -27,7 +27,7 @@ public class Activity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tour_id", nullable = false)
+    @JoinColumn(name = "tour_id")
     private Tour tour;
 }
 

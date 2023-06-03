@@ -1,9 +1,13 @@
 package com.go2climb.app.agency.domain.model.entity;
 
+import com.go2climb.app.activity.domain.model.entity.Activity;
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -51,6 +55,9 @@ public class Agency {
 
     @Min(0)
     @Max(5)
-    @Column(name = "score", columnDefinition = "float default 0")
-    private Float score;
+    @Column(name = "score", nullable = false)
+    private Float score = 0f;
+
+    @OneToMany(mappedBy = "agency")
+    private List<Tour> tours;
 }
