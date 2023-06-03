@@ -45,8 +45,8 @@ public class Agency {
     private String ruc;
 
     @Size(min = 1, max = 500)
-    @Column(name = "photo", length = 500)
     @NotNull
+    @Column(name = "photo", length = 500)
     private String photo;
 
     @Min(0)

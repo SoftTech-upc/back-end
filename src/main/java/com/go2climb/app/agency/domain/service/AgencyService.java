@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface AgencyService {
     List<Agency> getAll();
     Optional<Agency> getById(Integer id);
-    Agency save(Agency Agency);
-    Agency update(Agency Agency);
+    Agency save(Agency agency);
+    Agency update(Agency agency);
     boolean deleteById(Integer id);
 }
