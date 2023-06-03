@@ -1,4 +1,4 @@
-package com.go2climb.app.reservation.model.entity;
+package com.go2climb.app.reservation.domain.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -7,10 +7,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "reservations")
+@Getter
+@Setter
 public class Reservation {
 
     @Id
@@ -39,6 +39,13 @@ public class Reservation {
     @Column(name = "status", length = 20, nullable = false)
     private String status;
 
-    //private Integer tourId;
-    // private Integer touristId;
+  /*@JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tour_id", nullable = false)
+  private Tour tourId;
+
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tourist_id", nullable = false)
+  private Tourist touristId;*/
 }
