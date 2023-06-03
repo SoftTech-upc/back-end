@@ -1,4 +1,4 @@
-package com.go2climb.app.tourist.model.entity;
+package com.go2climb.app.tourist.domain.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +19,7 @@ public class Tourist {
     @NotNull
     @Column(name = "name", length = 50, nullable = false)
     private String name;
+
     @Size(min = 1, max = 75)
     @NotNull
     @Column(name = "last_name", length = 75, nullable = false)
@@ -39,7 +40,8 @@ public class Tourist {
     @Column(name = "password", length = 25, nullable = false)
     private String password;
 
+    @NotNull
     @Size(min = 1, max = 500)
-    @Column(name = "photo", length = 500)
+    @Column(name = "photo", length = 500, nullable = false)
     private String photo;
 }
