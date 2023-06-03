@@ -46,10 +46,11 @@ public class Agency {
 
     @Size(min = 1, max = 500)
     @Column(name = "photo", length = 500)
+    @NotNull
     private String photo;
 
     @Min(0)
     @Max(5)
-    @Column(name = "score", nullable = false)
+    @Column(name = "score", columnDefinition = "float default 0")
     private Float score;
 }
