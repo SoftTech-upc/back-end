@@ -3,6 +3,8 @@ package com.go2climb.app.agency.service;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.agency.domain.service.AgencyService;
+import com.go2climb.app.shared.exception.ResourceNotFoundException;
+import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,7 @@ public class AgencyServiceImpl implements AgencyService {
         if (agencyRepository.existsById(id)) {
             return agencyRepository.findById(id);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException("Agency", id);
         }
     }
 

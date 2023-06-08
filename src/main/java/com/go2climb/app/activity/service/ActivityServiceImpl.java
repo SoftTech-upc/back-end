@@ -3,6 +3,7 @@ package com.go2climb.app.activity.service;
 import com.go2climb.app.activity.domain.service.ActivityService;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.activity.domain.persistence.ActivityRepository;
+import com.go2climb.app.shared.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class ActivityServiceImpl implements ActivityService {
         if (activityRepository.existsById(id)) {
             return activityRepository.findById(id);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException("Activity", id);
         }
     }
 

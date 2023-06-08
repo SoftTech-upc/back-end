@@ -1,5 +1,6 @@
 package com.go2climb.app.tourist.service;
 
+import com.go2climb.app.shared.exception.ResourceNotFoundException;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import com.go2climb.app.tourist.domain.persistence.TouristRepository;
 import com.go2climb.app.tourist.domain.service.TouristService;
@@ -27,7 +28,7 @@ public class TouristServiceImpl implements TouristService {
         if (touristRepository.existsById(id)) {
             return touristRepository.findById(id);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException("Tourist", id);
         }
     }
 
