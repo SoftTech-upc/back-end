@@ -1,4 +1,6 @@
 package com.go2climb.app.reservation.domain.model.entity;
+import com.go2climb.app.tour.model.entity.Tour;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -39,13 +41,11 @@ public class Reservation {
     @Column(name = "status", length = 20, nullable = false)
     private String status;
 
-  /*@JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tour_id", nullable = false)
-  private Tour tourId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_id", nullable = false)
+    private Tour tour;
 
-  @JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tourist_id", nullable = false)
-  private Tourist touristId;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tourist_id", nullable = false)
+    private Tourist tourist;
 }

@@ -1,6 +1,7 @@
 package com.go2climb.app.tour.model.entity;
 
 import com.go2climb.app.activity.domain.model.entity.Activity;
+import com.go2climb.app.reservation.domain.model.entity.Reservation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -64,4 +66,7 @@ public class Tour {
 
     @OneToMany(mappedBy = "tour")
     private ArrayList<Activity> activities;
+
+    @OneToMany(mappedBy = "tour")
+    private List<Reservation> reservation;
 }
