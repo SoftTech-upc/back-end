@@ -1,4 +1,7 @@
-package com.go2climb.app.reservation.model.entity;
+package com.go2climb.app.reservation.domain.model.entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -39,6 +42,13 @@ public class Reservation {
     @Column(name = "status", length = 20, nullable = false)
     private String status;
 
-    //private Integer tourId;
-    // private Integer touristId;
+    @JsonProperty()
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tour_id")
+    private Tour tour;
+
+    @JsonProperty()
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourist_id")
+    private Tourist tourist;
 }
