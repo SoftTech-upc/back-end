@@ -1,5 +1,4 @@
 package com.go2climb.app.agency.domain.model.entity;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.tour.domain.model.entity.Tour;

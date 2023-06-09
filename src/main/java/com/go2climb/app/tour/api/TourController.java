@@ -21,9 +21,8 @@ public class TourController {
     private final TourMapper mapper;
 
     @PostMapping
-    public Tour save(@RequestBody Tour resource) {
-        //return mapper.toResource( tourService.save( mapper.toModel(resource) ) );
-      return tourService.save(resource);
+    public TourResource save(@RequestBody CreateTourResource resource) {
+        return mapper.toResource( tourService.save( mapper.toModel(resource) ) );
     }
 
     @GetMapping

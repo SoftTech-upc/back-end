@@ -3,6 +3,11 @@ package com.go2climb.app.activity.service;
 import com.go2climb.app.activity.domain.service.ActivityService;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.activity.domain.persistence.ActivityRepository;
+import com.go2climb.app.shared.exception.ResourceNotFoundException;
+import com.go2climb.app.shared.exception.ResourceValidationException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static com.go2climb.app.shared.constant.Constant.ACTIVITY_ENTITY;
+
 @Service
 public class ActivityServiceImpl implements ActivityService {
     @Autowired
     private ActivityRepository activityRepository;
+
+    @Autowired
+    private Validator validator;
 
     @Transactional(readOnly = true)
     @Override
@@ -27,14 +37,17 @@ public class ActivityServiceImpl implements ActivityService {
         if (activityRepository.existsById(id)) {
             return activityRepository.findById(id);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException("Activity", id);
         }
     }
 
     @Transactional
     @Override
     public Activity save(Activity activity) {
-        return activityRepository.save(activity);
+        Set<ConstraintViolation<Activity>> violations = validator.validate(activity);
+        if(!violations.isEmpty()) {
+            throw new ResourceValidationException(ACTIVITY_ENTITY, violations);
+        }
     }
 
     @Transactional
