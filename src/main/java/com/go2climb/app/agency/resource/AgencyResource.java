@@ -1,6 +1,9 @@
 package com.go2climb.app.agency.resource;
 
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter

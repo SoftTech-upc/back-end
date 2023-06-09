@@ -17,45 +17,45 @@ import java.util.List;
 @RequestMapping("reservations")
 @AllArgsConstructor
 public class ReservationController {
-    private final ReservationService reservationService;
-    private final ReservationMapper mapper;
+  private final ReservationService reservationService;
+  private final ReservationMapper mapper;
 
-    @PostMapping
-    public ReservationResource save(@RequestBody CreateReservationResource resource) {
-        return mapper.toResource(reservationService.save(mapper.toModel(resource)));
+  @PostMapping
+  public ReservationResource save(@RequestBody CreateReservationResource resource) {
+    return mapper.toResource(reservationService.save(mapper.toModel(resource)));
+  }
+
+  @GetMapping
+  public List<Reservation> fetchAll() {
+    return reservationService.fetchAll();
+  }
+
+  @GetMapping("{id}")
+  public ReservationResource fetchId(@PathVariable Integer id) {
+    //return studentService.fetchById(id).get();
+    return this.mapper.toResource(reservationService.fetchById(id).get());
+  }
+
+  @PutMapping("{id}")
+  public ResponseEntity<ReservationResource> update(@PathVariable Integer id,
+                                                    @RequestBody UpdateReservationResource resource){
+    if (id.equals(resource.getId())) {
+      ReservationResource studentResource = mapper.toResource(
+        reservationService.update(mapper.toModel(resource)));
+
+      return new ResponseEntity<>(studentResource, HttpStatus.OK);
+    } else {
+      return ResponseEntity.badRequest().build();
     }
+  }
 
-    @GetMapping
-    public List<Reservation> fetchAll() {
-        return reservationService.fetchAll();
+  @DeleteMapping("{id}")
+  public ResponseEntity<?> delete(@PathVariable Integer id) {
+    if(reservationService.deleteById(id)){
+      return ResponseEntity.ok().build(); //Devolver de forma directa - lambda
+      //return new ResponseEntity<>(HttpStatus.OK); //Devoluicon con instanciación
+    } else {
+      return ResponseEntity.notFound().build();
     }
-
-    @GetMapping("{id}")
-    public ReservationResource fetchId(@PathVariable Integer id) {
-        //return studentService.fetchById(id).get();
-        return this.mapper.toResource(reservationService.fetchById(id).get());
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<ReservationResource> update(@PathVariable Integer id,
-                                                      @RequestBody UpdateReservationResource resource){
-        if (id.equals(resource.getId())) {
-            ReservationResource studentResource = mapper.toResource(
-                    reservationService.update(mapper.toModel(resource)));
-
-            return new ResponseEntity<>(studentResource, HttpStatus.OK);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
-        if(reservationService.deleteById(id)){
-            return ResponseEntity.ok().build(); //Devolver de forma directa - lambda
-            //return new ResponseEntity<>(HttpStatus.OK); //Devoluicon con instanciación
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+  }
 }

@@ -1,5 +1,6 @@
 package com.go2climb.app.reservation.domain.model.entity;
-import com.go2climb.app.tour.model.entity.Tour;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -9,10 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "reservations")
 @Getter
 @Setter
+@Entity
+@Table(name = "reservations")
 public class Reservation {
 
     @Id
@@ -41,11 +42,13 @@ public class Reservation {
     @Column(name = "status", length = 20, nullable = false)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tour_id", nullable = false)
+    @JsonProperty()
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tour_id")
     private Tour tour;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tourist_id", nullable = false)
+    @JsonProperty()
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourist_id")
     private Tourist tourist;
 }

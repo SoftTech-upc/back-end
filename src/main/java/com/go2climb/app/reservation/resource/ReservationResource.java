@@ -1,5 +1,7 @@
 package com.go2climb.app.reservation.resource;
 
+import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import lombok.*;
 
 import java.util.Date;
@@ -11,9 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReservationResource {
 
-    private Integer id;
-    private Integer amount;
-    private Float price;
-    private Date scheduledDate;
-    private String status;
+  private Integer id;
+  private Integer amount;
+  private Float price;
+  private Date scheduledDate;
+  private String status;
+
+  private Tour tour;
+
+  private Tourist tourist;
 }

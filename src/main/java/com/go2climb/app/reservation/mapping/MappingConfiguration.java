@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration("learningMappingConfiguration")
 public class MappingConfiguration {
 
-    @Bean
-    public ReservationMapper studentMapper() {
-        return new ReservationMapper();
-    }
+  @Bean
+  public ReservationMapper studentMapper() {
+    return new ReservationMapper();
+  }
 }

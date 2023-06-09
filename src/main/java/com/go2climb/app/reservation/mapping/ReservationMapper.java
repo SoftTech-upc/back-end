@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 
 public class ReservationMapper implements Serializable {
-    @Autowired
-    EnhancedModelMapper mapper;
-    public Reservation toModel(CreateReservationResource resource) {
-        return this.mapper.map(resource, Reservation.class); }
-    public Reservation toModel(UpdateReservationResource resource) {
-        return this.mapper.map(resource, Reservation.class);
-    }
-    public ReservationResource toResource(Reservation reservation) {
-        return this.mapper.map(reservation, ReservationResource.class);
-    }
+  @Autowired
+  EnhancedModelMapper mapper;
+  public Reservation toModel(CreateReservationResource resource) {
+    return this.mapper.map(resource, Reservation.class); }
+  public Reservation toModel(UpdateReservationResource resource) {
+    return this.mapper.map(resource, Reservation.class);
+  }
+  public ReservationResource toResource(Reservation reservation) {
+    return this.mapper.map(reservation, ReservationResource.class);
+  }
 }
