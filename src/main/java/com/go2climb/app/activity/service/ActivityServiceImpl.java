@@ -48,6 +48,7 @@ public class ActivityServiceImpl implements ActivityService {
         if(!violations.isEmpty()) {
             throw new ResourceValidationException(ACTIVITY_ENTITY, violations);
         }
+        return activityRepository.save(activity);
     }
 
     @Transactional
