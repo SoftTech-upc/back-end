@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.reservation.domain.model.entity.Reservation;
+import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -68,16 +69,20 @@ public class Tour {
     @Column(name = "is_offer", nullable = false)
     private Boolean isOffer;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agency_id")
+    @JsonIgnoreProperties("tours")
     private Agency agency;
 
-    @OneToMany(mappedBy = "tour")
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tour")
     private List<Activity> activities;
 
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tour")
-    @JsonIgnore
-    private List<Reservation> reservation;
+    private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tour")
+    private List<ToursReviews> reviews;
 }

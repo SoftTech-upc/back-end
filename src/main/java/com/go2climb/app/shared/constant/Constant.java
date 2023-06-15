@@ -5,4 +5,5 @@ public class Constant {
   public final static String ACTIVITY_ENTITY = "Activity";
   public final static String TOUR_ENTITY = "Tour";
   public final static String TOURIST_ENTITY = "Tourist";
+  public final static String RESERVATION_ENTITY = "Reservation";
 }
