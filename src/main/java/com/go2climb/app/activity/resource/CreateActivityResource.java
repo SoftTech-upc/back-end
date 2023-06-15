@@ -20,4 +20,6 @@ public class CreateActivityResource {
     @NotNull
     private String description;
 
+    @NotNull
+    private Integer tourId;
 }
