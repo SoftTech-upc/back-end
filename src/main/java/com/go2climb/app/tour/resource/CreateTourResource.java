@@ -49,4 +49,7 @@ public class CreateTourResource {
 
     @NotNull
     private Boolean isOffer;
+
+    @NotNull
+    private Integer agencyId;
 }

@@ -1,8 +1,15 @@
 package com.go2climb.app.agency.resource;
 
+import com.go2climb.app.tour.domain.model.entity.Tour;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,10 +38,15 @@ public class CreateAgencyResource {
     @NotNull
     private String location;
 
+    @Size(min = 0, max = 5)
+    private Float score;
+
     @Size(min = 11, max = 11)
     @NotNull
     private String ruc;
 
     @Size(min = 1, max = 500)
     private String photo;
+
+
 }

@@ -1,13 +1,17 @@
 package com.go2climb.app.tour.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.agency.domain.model.entity.Agency;
+import com.go2climb.app.reservation.domain.model.entity.Reservation;
+import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.swing.text.View;
 import java.util.Date;
 import java.util.List;
 
@@ -67,8 +71,18 @@ public class Tour {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agency_id")
+    @JsonIgnoreProperties("tours")
     private Agency agency;
 
-    @OneToMany(mappedBy = "tour")
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tour")
     private List<Activity> activities;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tour")
+    private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tour")
+    private List<ToursReviews> reviews;
 }

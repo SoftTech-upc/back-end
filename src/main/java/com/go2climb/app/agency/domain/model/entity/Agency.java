@@ -1,7 +1,8 @@
 package com.go2climb.app.agency.domain.model.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class Agency {
 
     @Size(min = 1, max = 100)
     @NotNull
-    @Column(name = "email", length = 100, nullable = false)
+    @Column(name = "email", length = 100)
     private String email;
 
     @Size(min = 9, max = 9)
@@ -58,6 +59,8 @@ public class Agency {
     @Column(name = "score", nullable = false)
     private Float score = 0f;
 
-    @OneToMany(mappedBy = "agency")
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"agency", "activities", "reservations"})
     private List<Tour> tours;
+
 }

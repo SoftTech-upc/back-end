@@ -1,10 +1,17 @@
 package com.go2climb.app.tourist.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.go2climb.app.activity.domain.model.entity.Activity;
+import com.go2climb.app.agency.domain.model.entity.Agency;
+import com.go2climb.app.reservation.domain.model.entity.Reservation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -44,4 +51,12 @@ public class Tourist {
     @Size(min = 1, max = 500)
     @Column(name = "photo", length = 500, nullable = false)
     private String photo;
+
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tourist")
+    private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tourist")
+    private List<Reservation> toursReviews;
 }
