@@ -35,10 +35,4 @@ public class UpdateReservationResource {
   @Size(min = 1, max = 20)
   @NotNull
   private String status;
-
-  //@NotNull
-  private Tourist tourist;
-
-  //@NotNull
-  private Tour tour;
 }

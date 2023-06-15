@@ -18,8 +18,4 @@ public class ReservationResource {
   private Float price;
   private Date scheduledDate;
   private String status;
-
-  private Tour tour;
-
-  private Tourist tourist;
 }

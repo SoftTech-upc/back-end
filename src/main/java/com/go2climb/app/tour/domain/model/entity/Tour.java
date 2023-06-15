@@ -79,5 +79,5 @@ public class Tour {
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tour")
-    private List<Reservation> reservation;
+    private List<Reservation> reservations;
 }

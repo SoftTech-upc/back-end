@@ -39,8 +39,8 @@ public class CreateReservationResource {
   private String status;
 
   @NotNull
-  private Tourist tourist;
+  private Integer touristId;
 
   @NotNull
-  private Tour tour;
+  private Integer tourId;
 }
