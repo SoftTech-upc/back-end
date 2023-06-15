@@ -1,7 +1,9 @@
 package com.go2climb.app.toursreviews.domain.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -14,12 +16,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 @Setter
 @Getter
-@Table(name ="tours_reviews" )//la numenclatura no debe ir mayusculas
+@Table(name ="tours_reviews" )
 @Entity
 public class ToursReviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @NotNull
     @Column(name="date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -34,21 +36,13 @@ public class ToursReviews {
     @Column(name="score")
     private Long score;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tourist_id")
+    @JsonIgnoreProperties({"reservations", "toursReviews"})
     private Tourist tourist;
 
-    // Relationships
-    //@ManyToOne(fetch = FetchType.EAGER, optional = false)
-    //@JoinColumn(name  = "tourists_id", nullable = false) // no debe guardar un objeto sin Tourists
-    //@JsonIgnore// solo debe mostrar criterio
-   // private Tourists tourists;
-    //cuando yo creo  un objeto en la Criterion automaticamente va recuperar a que Tour
-    // le pertenece
-
-
-
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_id")
+    @JsonIgnoreProperties({"agency", "activities", "reservations", "reviews"})
+    private Tour tour;
 }

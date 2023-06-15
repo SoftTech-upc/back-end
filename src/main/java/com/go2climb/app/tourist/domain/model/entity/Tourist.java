@@ -55,4 +55,8 @@ public class Tourist {
     @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tourist")
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tourist")
+    private List<Reservation> toursReviews;
 }
