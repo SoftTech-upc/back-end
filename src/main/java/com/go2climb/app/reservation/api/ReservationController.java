@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("reservations")
+//@RequestMapping("reservations")
+@RequestMapping("hired_services")
 @AllArgsConstructor
 public class ReservationController {
   private final ReservationService reservationService;

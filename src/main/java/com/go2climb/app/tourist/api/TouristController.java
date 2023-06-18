@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("tourists")
+//@RequestMapping("tourists")
+@RequestMapping("customers")
 @AllArgsConstructor
 public class TouristController {
     private final TouristService touristService;
