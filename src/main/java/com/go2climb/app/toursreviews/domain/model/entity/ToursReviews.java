@@ -1,8 +1,6 @@
 package com.go2climb.app.toursreviews.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
@@ -22,27 +20,30 @@ public class ToursReviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotNull
     @Column(name="date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date date;
+
     @NotNull
-    @NotBlank // no para numericos
+    @NotBlank
     @Size(min =1,max = 1000)
     @Column(name="comment",length = 1000,nullable = false)
     private String comment;
+
     @NotNull
     @Column(name="score")
     private Long score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tourist_id")
-    @JsonIgnoreProperties({"reservations", "toursReviews"})
+    @JsonBackReference
     private Tourist tourist;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tour_id")
-    @JsonIgnoreProperties({"agency", "activities", "reservations", "reviews"})
+    @JsonBackReference
     private Tour tour;
 }

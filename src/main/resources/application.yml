@@ -29,11 +29,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
-  jackson:
-    serialization:
-      fail-on-empty-beans: false
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

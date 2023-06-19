@@ -1,5 +1,6 @@
 package com.go2climb.app.reservation.domain.model.entity;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
@@ -44,11 +45,11 @@ public class Reservation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tour_id")
-    @JsonIgnoreProperties({"agency", "activities", "reservations"})
+    @JsonBackReference
     private Tour tour;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tourist_id")
-    @JsonIgnoreProperties("reservations")
+    @JsonBackReference
     private Tourist tourist;
 }

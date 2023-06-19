@@ -16,11 +16,6 @@ public class ToursReviewsMapper implements Serializable {
     EnhancedModelMapper mapper;
 
     public ToursReviews toModel(CreateToursReviewsResource resource) {
-        this.mapper.addMappings(new PropertyMap<CreateToursReviewsResource, ToursReviews>() {
-            protected void configure() {
-                map().setId(source.getTourId());
-            }
-        });
         return this.mapper.map(resource, ToursReviews.class);
     }
 

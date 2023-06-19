@@ -71,18 +71,18 @@ public class Tour {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agency_id")
-    @JsonIgnoreProperties("tours")
+    @JsonBackReference
     private Agency agency;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("tour")
+    @JsonManagedReference
     private List<Activity> activities;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("tour")
+    @JsonManagedReference
     private List<Reservation> reservations;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("tour")
+    @JsonManagedReference
     private List<ToursReviews> reviews;
 }

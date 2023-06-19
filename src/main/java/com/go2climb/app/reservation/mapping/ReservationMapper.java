@@ -16,11 +16,6 @@ public class ReservationMapper implements Serializable {
   EnhancedModelMapper mapper;
 
   public Reservation toModel(CreateReservationResource resource) {
-    this.mapper.addMappings(new PropertyMap<CreateReservationResource, Reservation>() {
-      protected void configure() {
-        map().setId(source.getTourId());
-      }
-    });
     return this.mapper.map(resource, Reservation.class);
   }
   public Reservation toModel(UpdateReservationResource resource) {
