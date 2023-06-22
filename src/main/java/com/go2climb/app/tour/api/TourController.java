@@ -21,8 +21,9 @@ public class TourController {
     private final TourMapper mapper;
 
     @PostMapping
-    public TourResource save(@RequestBody CreateTourResource resource) {
-        return mapper.toResource( tourService.save( mapper.toModel(resource) ) );
+    public Tour save(@RequestBody Tour resource) {
+        //return mapper.toResource( tourService.save( mapper.toModel(resource) ) );
+      return tourService.save(resource);
     }
 
     @GetMapping
@@ -46,7 +47,7 @@ public class TourController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<TourResource> delete(@PathVariable Integer id) {
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
         if (tourService.deleteById(id)) {
             return ResponseEntity.ok().build();
         } else {

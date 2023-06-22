@@ -1,5 +1,6 @@
 package com.go2climb.app.tour.resource;
 
+import com.go2climb.app.agency.domain.model.entity.Agency;
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -53,4 +54,7 @@ public class UpdateTourResource {
 
     @NotNull
     private Boolean isOffer;
+
+    @NotNull
+    private Agency agency;
 }

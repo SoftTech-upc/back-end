@@ -1,6 +1,7 @@
 package com.go2climb.app.tour.resource;
 
 import com.go2climb.app.activity.domain.model.entity.Activity;
+import com.go2climb.app.agency.domain.model.entity.Agency;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;

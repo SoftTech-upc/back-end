@@ -1,10 +1,18 @@
 package com.go2climb.app.tourist.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.go2climb.app.activity.domain.model.entity.Activity;
+import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
+import com.go2climb.app.reservation.domain.model.entity.Reservation;
+import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,19 +23,19 @@ public class Tourist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "name", length = 50, nullable = false)
+    @Column(name = "name", length = 300, nullable = false)
     private String name;
 
-    @Size(min = 1, max = 75)
+    @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "last_name", length = 75, nullable = false)
+    @Column(name = "last_name", length = 300, nullable = false)
     private String lastName;
 
-    @Size(min = 1, max = 250)
+    @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "email", length = 250, nullable = false)
+    @Column(name = "email", length = 300, nullable = false)
     private String email;
 
     @Size(min = 9, max = 9)
@@ -35,13 +43,28 @@ public class Tourist {
     @Column(name = "phone_number", length = 9, nullable = false)
     private String phoneNumber;
 
-    @Size(min = 1, max = 25)
+    @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "password", length = 25, nullable = false)
+    @Column(name = "password", length = 300, nullable = false)
     private String password;
 
     @NotNull
     @Size(min = 1, max = 500)
     @Column(name = "photo", length = 500, nullable = false)
     private String photo;
+
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JsonIgnoreProperties("tourist")
+    @JsonIgnore
+    private List<Reservation> reservation;
+
+    //@JsonIgnoreProperties("tourist")
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    //@JsonManagedReference
+    private List<AgencyReview> agencyReviews;
+
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<ToursReviews> toursReviews;
 }

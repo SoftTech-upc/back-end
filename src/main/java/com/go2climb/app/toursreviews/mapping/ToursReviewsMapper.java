@@ -1,0 +1,30 @@
+package com.go2climb.app.toursreviews.mapping;
+
+
+import com.example.SoftTech.resource.CreateToursReviewsResource;
+import com.example.SoftTech.resource.ToursReviewsResource;
+import com.example.SoftTech.resource.UpdateToursReviewsResource;
+import com.go2climb.app.shared.mapping.EnhancedModelMapper;
+import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.Serializable;
+
+public class ToursReviewsMapper implements Serializable {
+    @Autowired
+    EnhancedModelMapper mapper;
+
+
+    public ToursReviews toModel(CreateToursReviewsResource resource){
+        return this.mapper.map(resource, ToursReviews.class);
+    }
+
+    public ToursReviewsResource toResource(ToursReviews agencyReview){
+        return this.mapper.map(agencyReview, ToursReviewsResource.class);
+    }
+
+    public ToursReviews toModel(UpdateToursReviewsResource resource){
+        return this.mapper.map(resource,ToursReviews.class);
+    }
+
+}
