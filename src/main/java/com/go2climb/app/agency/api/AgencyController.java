@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("agencies")
+@RequestMapping("api/agencies")
 @AllArgsConstructor
 public class AgencyController {
     private final AgencyService agencyService;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("tours_reviews")
+@RequestMapping("api/tours_reviews")
 @AllArgsConstructor
 public class ToursReviewsController {
 

@@ -16,7 +16,7 @@ import java.io.Console;
 import java.util.List;
 
 @RestController
-@RequestMapping("agency_review")
+@RequestMapping("api/agency_review")
 @AllArgsConstructor
 public class AgencyReviewController {
     private final AgencyReviewService agencyReviewService;
