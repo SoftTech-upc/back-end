@@ -31,6 +31,7 @@ public class WebSecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/api/tourists","/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()  // Permitir acceso sin autenticación al endpoint /api/tourist
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -40,6 +41,19 @@ public class WebSecurityConfig {
                 .addFilter(jwtAuthentication)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+//        http
+//                .cors()
+//                .and()
+//                .csrf().disable()
+//                .authorizeHttpRequests()
+//                .requestMatchers("/api/tourist").permitAll()  // Permitir acceso sin autenticación al endpoint /api/tourist
+//                .anyRequest().authenticated()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .addFilter(jwtAuthenticationFilter())
+//                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -57,6 +71,6 @@ public class WebSecurityConfig {
     }
 
 //    public static void main(String[] args){
-//        System.out.println("pass: " + new BCryptPasswordEncoder().encode("password"));
+//        System.out.println("pass: " + new BCryptPasswordEncoder().encode("jerry"));
 //    }
 }
