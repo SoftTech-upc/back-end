@@ -66,4 +66,9 @@ public class Agency {
     @JsonIgnore
     //@JsonManagedReference
     private List<AgencyReview> agencyReviews;
+
+    @Size(min = 1, max = 300)
+    @NotNull
+    @Column(name = "password", length = 300, nullable = false)
+    private String password;
 }

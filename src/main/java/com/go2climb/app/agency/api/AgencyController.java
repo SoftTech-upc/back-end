@@ -9,6 +9,7 @@ import com.go2climb.app.agency.resource.UpdateAgencyResource;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class AgencyController {
 
     @PostMapping
     public AgencyResource save(@RequestBody CreateAgencyResource resource) {
+        resource.setPassword(new BCryptPasswordEncoder().encode(resource.getPassword()));
         return mapper.toResource( agencyService.save( mapper.toModel(resource) ) );
     }
 

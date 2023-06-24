@@ -1,5 +1,6 @@
 package com.go2climb.app.security;
 
+import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,9 +10,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 @AllArgsConstructor
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl<T> implements UserDetails {
 
-    private final Tourist tourist;
+    private final T user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -20,12 +21,20 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        return tourist.getPassword();
+        if (user instanceof Tourist) {
+            return ((Tourist) user).getPassword();
+        } else{
+            return ((Agency) user).getPassword();
+        }
     }
 
     @Override
     public String getUsername() {
-        return tourist.getEmail();
+        if (user instanceof Tourist) {
+            return ((Tourist) user).getEmail();
+        } else{
+            return ((Agency) user).getEmail();
+        }
     }
 
     @Override
@@ -48,7 +57,11 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public String getName(){
-        return tourist.getName();
+    public String getName() {
+        if (user instanceof Tourist) {
+            return ((Tourist) user).getName();
+        } else{
+            return ((Agency) user).getName();
+        }
     }
 }
