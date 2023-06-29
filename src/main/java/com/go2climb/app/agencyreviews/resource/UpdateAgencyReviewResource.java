@@ -37,10 +37,4 @@ public class UpdateAgencyReviewResource {
 
     @NotNull
     private Integer costScore;
-
-    @NotNull
-    private Tourist tourist;
-
-    @NotNull
-    private Agency agency;
 }

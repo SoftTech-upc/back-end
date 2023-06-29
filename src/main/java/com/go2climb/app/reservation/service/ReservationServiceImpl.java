@@ -47,39 +47,13 @@ public class ReservationServiceImpl implements ReservationService {
     return reservationRepository.save(reservation);
   }
 
-//  @Transactional
-//  @Override
-//  public boolean deleteById(Integer id) {
-//    if (reservationRepository.existsById(id)) {
-//      reservationRepository.deleteById(id);
-//      return true;
-//    }
-//    return false;
-//  }
-
-  @Transactional
+ @Transactional
   @Override
   public boolean deleteById(Integer id) {
-    Optional<Reservation> agencyReviewOptional = reservationRepository.findById(id);
-    if (agencyReviewOptional.isEmpty()) {
-      return false;
+    if (reservationRepository.existsById(id)) {
+      reservationRepository.deleteById(id);
+      return true;
     }
-    Reservation reservation = agencyReviewOptional.get();
-
-    // Elimina la referencia en la entidad Tourist
-    Tourist tourist = reservation.getTourist();
-    if (tourist != null) {
-      tourist.getReservation().remove(reservation);
-    }
-
-    // Elimina la referencia en la entidad Agency
-    Tour tour = reservation.getTour();
-    if (tour != null) {
-      tour.getReservation().remove(reservation);
-    }
-
-    // Elimina el elemento AgencyReview
-    reservationRepository.deleteById(id);
-    return true;
-  }
+    return false;
+ }
 }

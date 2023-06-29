@@ -22,7 +22,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     #    JDBC : SGDB :// HOST : PORT / DB
-    url: jdbc:postgresql://localhost:5432/A
+    url: jdbc:postgresql://localhost:5432/go2climb
     username: postgres
     password: admin
   jpa:

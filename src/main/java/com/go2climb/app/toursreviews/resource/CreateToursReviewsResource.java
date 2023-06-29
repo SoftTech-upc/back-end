@@ -1,5 +1,7 @@
-package com.example.SoftTech.resource;
+package com.go2climb.app.toursreviews.resource;
 
+import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,4 +24,8 @@ public class CreateToursReviewsResource {
     private String comment;
     @NotNull
     private Long score;
+    @NotNull
+    private Tourist tourist;
+    @NotNull
+    private Tour tours;
 }

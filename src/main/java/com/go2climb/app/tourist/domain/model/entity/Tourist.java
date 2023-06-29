@@ -53,18 +53,15 @@ public class Tourist {
     @Column(name = "photo", length = 500, nullable = false)
     private String photo;
 
-    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JsonIgnoreProperties("tourist")
-    @JsonIgnore
-    private List<Reservation> reservation;
+    @JsonIgnoreProperties({"tourist"})
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 
-    //@JsonIgnoreProperties("tourist")
-    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    //@JsonManagedReference
+    @JsonIgnoreProperties({"tourist"})
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
     private List<AgencyReview> agencyReviews;
 
-    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<ToursReviews> toursReviews;
+    @JsonIgnoreProperties({"tourist"})
+    @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
+    private List<ToursReviews> tourReviews;
 }

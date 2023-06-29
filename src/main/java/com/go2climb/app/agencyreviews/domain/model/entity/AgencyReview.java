@@ -1,5 +1,6 @@
 package com.go2climb.app.agencyreviews.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.go2climb.app.agency.domain.model.entity.Agency;
@@ -57,15 +58,13 @@ public class AgencyReview {
         createdAt = LocalDateTime.now();
     }
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "agency_id")
-    //@JsonBackReference
+    @JsonIgnoreProperties("reviews")
     private Agency agency;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "tourist_id")
-    //@JsonBackReference
+    @JsonIgnoreProperties("agencyReviews")
     private Tourist tourist;
 }

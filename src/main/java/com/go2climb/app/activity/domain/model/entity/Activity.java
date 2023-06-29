@@ -1,6 +1,6 @@
 package com.go2climb.app.activity.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -27,8 +27,8 @@ public class Activity {
     @Column(name = "email", length = 100, nullable = false)
     private String description;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"activities"})
+    @ManyToOne()
     @JoinColumn(name = "tour_id")
     private Tour tour;
 }
