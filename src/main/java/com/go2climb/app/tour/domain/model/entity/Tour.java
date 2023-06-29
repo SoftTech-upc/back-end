@@ -1,6 +1,7 @@
 package com.go2climb.app.tour.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.reservation.domain.model.entity.Reservation;
@@ -10,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.swing.text.View;
 import java.util.Date;
 import java.util.List;
 
@@ -68,16 +68,15 @@ public class Tour {
     @Column(name = "is_offer", nullable = false)
     private Boolean isOffer;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agency_id")
     private Agency agency;
 
-    @OneToMany(mappedBy = "tour")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Activity> activities;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("tour")
-    @JsonIgnore
     private List<Reservation> reservation;
 }

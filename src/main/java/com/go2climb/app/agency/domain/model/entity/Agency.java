@@ -1,8 +1,6 @@
 package com.go2climb.app.agency.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.go2climb.app.activity.domain.model.entity.Activity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.persistence.*;
@@ -61,11 +59,12 @@ public class Agency {
     @Column(name = "score", nullable = false)
     private Float score = 0f;
 
-    //@JsonIgnoreProperties("agency")
-    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    //@JsonManagedReference
+    @OneToMany(mappedBy = "agency")
     private List<AgencyReview> agencyReviews;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
+    private List<Tour> tours;
 
     @Size(min = 1, max = 300)
     @NotNull
