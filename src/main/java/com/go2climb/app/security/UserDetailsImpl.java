@@ -14,6 +14,7 @@ public class UserDetailsImpl<T> implements UserDetails {
 
     private final T user;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();
