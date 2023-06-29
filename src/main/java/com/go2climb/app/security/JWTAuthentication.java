@@ -17,34 +17,105 @@ import java.io.IOException;
 import java.util.Collections;
 
 public class JWTAuthentication  extends UsernamePasswordAuthenticationFilter {
-    public Authentication attemptAuthentication(HttpServletRequest request,
-                                                HttpServletResponse response) throws AuthenticationException{
-        AuthCredentials authCredentials = new AuthCredentials();
+//    public Authentication attemptAuthentication(HttpServletRequest request,
+//                                                HttpServletResponse response) throws AuthenticationException{
+//        AuthCredentials authCredentials = new AuthCredentials();
+//
+//        try {
+//            authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
+//        }catch (IOException e){
+//
+//        }
+//
+//        UsernamePasswordAuthenticationToken usernamePAT = new UsernamePasswordAuthenticationToken(
+//                authCredentials.getEmail(),
+//                authCredentials.getPassword(),
+//                Collections.emptyList()
+//        );
+//        return getAuthenticationManager().authenticate(usernamePAT);
+//    }
+public Authentication attemptAuthentication(HttpServletRequest request,
+                                               HttpServletResponse response) throws AuthenticationException {
+    AuthCredentials authCredentials = new AuthCredentials();
 
-        try {
-            authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
-        }catch (IOException e){
-
-        }
-
-        UsernamePasswordAuthenticationToken usernamePAT = new UsernamePasswordAuthenticationToken(
-                authCredentials.getEmail(),
-                authCredentials.getPassword(),
-                Collections.emptyList()
-        );
-        return getAuthenticationManager().authenticate(usernamePAT);
+    try {
+        authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
+    } catch (IOException e) {
+        // Manejar la excepción adecuadamente
     }
+
+    UsernamePasswordAuthenticationToken usernamePAT = new UsernamePasswordAuthenticationToken(
+            authCredentials.getEmail(),
+            authCredentials.getPassword(),
+            Collections.emptyList()
+    );
+    return getAuthenticationManager().authenticate(usernamePAT);
+}
+
+
+//    protected void successfulAuthentication(HttpServletRequest request,
+//                                            HttpServletResponse response,
+//                                            FilterChain chain,
+//                                            Authentication authResult) throws IOException, ServletException{
+//        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authResult.getPrincipal();
+//        String token = TokenUtils.createToken(userDetailsImpl.getName(), userDetailsImpl.getUsername());
+//
+//        response.addHeader("Authorization","Bearer"+token);
+//        response.getWriter().flush();
+//
+//
+//        super.successfulAuthentication(request,response,chain,authResult);
+//    }
+
+//    protected void successfulAuthentication(HttpServletRequest request,
+//                                            HttpServletResponse response,
+//                                            FilterChain chain,
+//                                            Authentication authResult) throws IOException, ServletException {
+//        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authResult.getPrincipal();
+//        String token = TokenUtils.createToken(userDetailsImpl.getName(), userDetailsImpl.getUsername());
+//
+//        // Agrega el objeto UserDetailsImpl al cuerpo de la respuesta
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String userDetailsJson = objectMapper.writeValueAsString(userDetailsImpl);
+//        response.setContentType("application/json");
+//        response.getWriter().write(userDetailsJson);
+//
+//        response.addHeader("Authorization", "Bearer " + token);
+//        response.getWriter().flush();
+//
+//        super.successfulAuthentication(request, response, chain, authResult);
+//    }
+
+//    protected void successfulAuthentication(HttpServletRequest request,
+//                                            HttpServletResponse response,
+//                                            FilterChain chain,
+//                                            Authentication authResult) throws IOException, ServletException {
+//        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authResult.getPrincipal();
+//        String token = TokenUtils.createToken(userDetailsImpl.getName(), userDetailsImpl.getUsername());
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String tokenJson = objectMapper.writeValueAsString(Collections.singletonMap("token", token));
+//
+//        response.setContentType("application/json");
+//        response.getWriter().write(tokenJson);
+//    }
 
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
                                             FilterChain chain,
-                                            Authentication authResult) throws IOException, ServletException{
+                                            Authentication authResult) throws IOException, ServletException {
         UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authResult.getPrincipal();
         String token = TokenUtils.createToken(userDetailsImpl.getName(), userDetailsImpl.getUsername());
 
-        response.addHeader("Authorization","Bearer"+token);
-        response.getWriter().flush();
+        AuthResponse authResponse = new AuthResponse(token, userDetailsImpl);
 
-        super.successfulAuthentication(request,response,chain,authResult);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String responseJson = objectMapper.writeValueAsString(authResponse);
+
+        response.setContentType("application/json");
+        response.getWriter().write(responseJson);
     }
+
+
+
 }
