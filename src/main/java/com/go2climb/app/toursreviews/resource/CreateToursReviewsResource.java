@@ -19,7 +19,7 @@ public class CreateToursReviewsResource {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @NotNull
-    @NotBlank // no para numericos
+    @NotBlank
     @Size(min =1,max = 1000)
     private String comment;
     @NotNull

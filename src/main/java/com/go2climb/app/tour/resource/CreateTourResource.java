@@ -51,5 +51,5 @@ public class CreateTourResource {
     private Boolean isOffer;
 
     @NotNull
-    private Integer agencyId;
+    private Agency agency;
 }
