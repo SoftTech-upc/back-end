@@ -46,38 +46,12 @@ public class AgencyReviewServiceImpl implements AgencyReviewService {
         return agencyReviewRepository.save(agencyReview);
     }
 
-//    @Transactional
-//    @Override
-//    public boolean deleteById(Integer id) {
-//        if (!agencyReviewRepository.existsById(id)) {
-//            return false;
-//        }
-//        agencyReviewRepository.deleteById(id);
-//        return true;
-//    }
-
     @Transactional
     @Override
     public boolean deleteById(Integer id) {
-        Optional<AgencyReview> agencyReviewOptional = agencyReviewRepository.findById(id);
-        if (agencyReviewOptional.isEmpty()) {
+        if (!agencyReviewRepository.existsById(id)) {
             return false;
         }
-        AgencyReview agencyReview = agencyReviewOptional.get();
-
-        // Elimina la referencia en la entidad Tourist
-        Tourist tourist = agencyReview.getTourist();
-        if (tourist != null) {
-            tourist.getAgencyReviews().remove(agencyReview);
-        }
-
-        // Elimina la referencia en la entidad Agency
-        Agency agency = agencyReview.getAgency();
-        if (agency != null) {
-            agency.getAgencyReviews().remove(agencyReview);
-        }
-
-        // Elimina el elemento AgencyReview
         agencyReviewRepository.deleteById(id);
         return true;
     }

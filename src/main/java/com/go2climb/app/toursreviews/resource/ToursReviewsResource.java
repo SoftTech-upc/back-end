@@ -1,4 +1,4 @@
-package com.example.SoftTech.resource;
+package com.go2climb.app.toursreviews.resource;
 
 import lombok.*;
 

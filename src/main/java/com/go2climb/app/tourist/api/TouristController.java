@@ -34,8 +34,8 @@ public class TouristController {
     }
 
     @GetMapping("{id}")
-    public TouristResource getById(@PathVariable Integer id) {
-        return this.mapper.toResource(touristService.getById(id).get());
+    public Tourist getById(@PathVariable Integer id) {
+        return touristService.getById(id).get();
     }
 
     @PutMapping("{id}")

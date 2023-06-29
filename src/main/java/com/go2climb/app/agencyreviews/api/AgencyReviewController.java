@@ -23,8 +23,8 @@ public class AgencyReviewController {
     private final AgencyReviewMapper mapper;
 
     @PostMapping
-    public AgencyReviewResource save(@RequestBody CreateAgencyReviewResource rresource) {
-        return mapper.toResource( agencyReviewService.save(mapper.toModel(rresource)));
+    public AgencyReviewResource save(@RequestBody CreateAgencyReviewResource resource) {
+        return mapper.toResource( agencyReviewService.save(mapper.toModel(resource)));
     }
 
     @GetMapping
@@ -33,9 +33,8 @@ public class AgencyReviewController {
     }
 
     @GetMapping("{id}")
-    public AgencyReview fetchId(@PathVariable Integer id){
-        //return this.mapper.toResource(agencyReviewService.fecthById(id).get());
-        return  agencyReviewService.fecthById(id).get();
+    public AgencyReviewResource fetchId(@PathVariable Integer id){
+        return this.mapper.toResource(agencyReviewService.fecthById(id).get());
     }
 
     @PutMapping("{id}")

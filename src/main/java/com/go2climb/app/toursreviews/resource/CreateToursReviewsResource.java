@@ -27,5 +27,5 @@ public class CreateToursReviewsResource {
     @NotNull
     private Tourist tourist;
     @NotNull
-    private Tour tours;
+    private Tour tour;
 }

@@ -33,8 +33,8 @@ public class AgencyController {
     }
 
     @GetMapping("{id}")
-    public AgencyResource getById(@PathVariable Integer id) {
-        return this.mapper.toResource(agencyService.getById(id).get());
+    public Agency getById(@PathVariable Integer id) {
+        return agencyService.getById(id).get();
     }
 
     @PutMapping("{id}")

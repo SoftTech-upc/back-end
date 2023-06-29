@@ -1,11 +1,10 @@
 package com.go2climb.app.toursreviews.mapping;
 
-
-import com.example.SoftTech.resource.CreateToursReviewsResource;
-import com.example.SoftTech.resource.ToursReviewsResource;
-import com.example.SoftTech.resource.UpdateToursReviewsResource;
 import com.go2climb.app.shared.mapping.EnhancedModelMapper;
 import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
+import com.go2climb.app.toursreviews.resource.CreateToursReviewsResource;
+import com.go2climb.app.toursreviews.resource.ToursReviewsResource;
+import com.go2climb.app.toursreviews.resource.UpdateToursReviewsResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;

@@ -31,8 +31,8 @@ public class TourController {
     }
 
     @GetMapping("{id}")
-    public TourResource getById(@PathVariable Integer id) {
-        return this.mapper.toResource(tourService.getById(id).get());
+    public Tour getById(@PathVariable Integer id) {
+        return tourService.getById(id).get();
     }
 
     @PutMapping("{id}")

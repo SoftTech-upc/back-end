@@ -60,7 +60,7 @@ public class Agency {
     private Float score = 0f;
 
     @JsonIgnoreProperties({"agency"})
-    @OneToMany(mappedBy = "agency")
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
     private List<AgencyReview> reviews;
 
     @JsonIgnoreProperties({"agency"})
