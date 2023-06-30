@@ -35,6 +35,11 @@ public class TourController {
         return tourService.getAllOffer();
     }
 
+    @GetMapping("date")
+    public List<Tour> getAllDate() {
+        return tourService.getOrderDateDesc();
+    }
+
     @GetMapping("score")
     public List<Tour> getOrderScoreDesc() {
         return tourService.getOrderScoreDesc();

@@ -13,4 +13,5 @@ public interface TourService {
     boolean deleteById(Integer id);
     List<Tour> getAllOffer();
     List<Tour> getOrderScoreDesc();
+    public List<Tour> getOrderDateDesc();
 }

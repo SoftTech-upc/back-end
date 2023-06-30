@@ -52,7 +52,6 @@ public class Tour {
     @Column(name = "location", length = 200, nullable = false)
     private String location;
 
-
     @CreationTimestamp
     @CreatedDate
     @Column(name = "created_at")

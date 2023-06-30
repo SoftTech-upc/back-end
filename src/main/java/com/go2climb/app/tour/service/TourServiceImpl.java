@@ -63,4 +63,10 @@ public class TourServiceImpl implements TourService {
     public List<Tour> getOrderScoreDesc() {
         return tourRepository.findAllByOrderByScoreDesc();
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Tour> getOrderDateDesc() {
+        return tourRepository.findAllByOrderByCreationDateDesc();
+    }
 }

@@ -11,6 +11,6 @@ import java.util.List;
 public interface TourRepository extends JpaRepository<Tour, Integer> {
     @Query("SELECT t FROM Tour t WHERE t.isOffer = true")
     List<Tour> findOfferTours();
-
     List<Tour> findAllByOrderByScoreDesc();
+    List<Tour> findAllByOrderByCreationDateDesc();
 }
