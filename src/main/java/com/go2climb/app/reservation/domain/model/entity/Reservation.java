@@ -46,13 +46,12 @@ public class Reservation {
     @Column(name = "status", length = 20, nullable = false)
     private String status;
 
-    @JsonIgnoreProperties({"reservations"})
+    @JsonIgnoreProperties({"reservations", "reviews"})
     @ManyToOne()
     @JoinColumn(name = "tour_id")
-    @JsonBackReference
     private Tour tour;
 
-    @JsonIgnoreProperties({"reservations"})
+    @JsonIgnoreProperties({"reservations", "agencyReviews", "toursReviews"})
     @ManyToOne()
     @JoinColumn(name = "tourist_id")
     private Tourist tourist;
