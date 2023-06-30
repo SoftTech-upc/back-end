@@ -31,7 +31,7 @@ public class WebSecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/tours/**","/api/agencies/**","/api/tourists/**","/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()  // Permitir acceso sin autenticación al endpoint /api/tourist
+                .requestMatchers("/api/agencies/**","/api/tourists/**","/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()  // Permitir acceso sin autenticación al endpoint /api/tourist
                 .anyRequest()
                 .authenticated()
                 .and()
