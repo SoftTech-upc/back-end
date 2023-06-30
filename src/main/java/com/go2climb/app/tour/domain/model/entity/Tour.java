@@ -1,6 +1,8 @@
 package com.go2climb.app.tour.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.reservation.domain.model.entity.Reservation;
@@ -71,6 +73,7 @@ public class Tour {
     @JsonIgnoreProperties({"tours"})
     @ManyToOne()
     @JoinColumn(name = "agency_id")
+//    @JsonBackReference
     private Agency agency;
 
     @JsonIgnoreProperties({"tour"})
@@ -79,6 +82,7 @@ public class Tour {
 
     @JsonIgnoreProperties({"tour"})
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+//    @JsonManagedReference
     private List<Reservation> reservations;
 
     @JsonIgnoreProperties({"tour"})

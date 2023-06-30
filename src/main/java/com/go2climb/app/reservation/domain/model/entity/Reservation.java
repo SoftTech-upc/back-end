@@ -1,4 +1,5 @@
 package com.go2climb.app.reservation.domain.model.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.go2climb.app.tour.domain.model.entity.Tour;
@@ -46,6 +47,7 @@ public class Reservation {
     @JsonIgnoreProperties({"reservations"})
     @ManyToOne()
     @JoinColumn(name = "tour_id")
+    @JsonBackReference
     private Tour tour;
 
     @JsonIgnoreProperties({"reservations"})

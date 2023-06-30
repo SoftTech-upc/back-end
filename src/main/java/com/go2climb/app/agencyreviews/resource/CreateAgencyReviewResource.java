@@ -27,7 +27,6 @@ public class CreateAgencyReviewResource {
     @Size(min = 2, max = 1000)
     private String comment;
 
-
     @NotNull
     private Float professionalismScore;
 
