@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -37,13 +35,15 @@ public class AgencyReview {
     @Column(name = "comment", length = 50, nullable = false)
     private String comment;
 
+    @Min(value = 0, message = "El puntaje de profesionalismo debe ser mayor o igual a 0")
+    @Max(value = 5, message = "El puntaje de profesionalismo debe ser menor o igual a 5")
     @NotNull
     @Column(name = "professionalism_score")
-    private Integer professionalismScore;
+    private Float professionalismScore;
 
     @NotNull
     @Column(name = "security_score")
-    private Integer securityScore;
+    private Float securityScore;
 
     @NotNull
     @Column(name = "quality_score")

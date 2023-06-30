@@ -54,8 +54,7 @@ public class Agency {
     @Column(name = "photo", length = 500)
     private String photo;
 
-    @Min(0)
-    @Max(5)
+
     @Column(name = "score", nullable = false)
     private Float score = 0f;
 

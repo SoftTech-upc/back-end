@@ -4,9 +4,7 @@ package com.go2climb.app.agencyreviews.resource;
 
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,8 +27,9 @@ public class CreateAgencyReviewResource {
     @Size(min = 2, max = 1000)
     private String comment;
 
+
     @NotNull
-    private Integer professionalismScore;
+    private Float professionalismScore;
 
     @NotNull
     private Integer securityScore;

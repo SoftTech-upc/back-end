@@ -1,6 +1,7 @@
 package com.go2climb.app.agencyreviews.service;
 
 import com.go2climb.app.agency.domain.model.entity.Agency;
+import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
 import com.go2climb.app.agencyreviews.domain.persistence.AgencyReviewRepository;
 import com.go2climb.app.agencyreviews.domain.service.AgencyReviewService;
@@ -17,6 +18,9 @@ public class AgencyReviewServiceImpl implements AgencyReviewService {
 
     @Autowired
     private AgencyReviewRepository agencyReviewRepository;
+
+    @Autowired
+    private AgencyRepository agencyRepository;
 
     @Transactional(readOnly= true)
     @Override
@@ -37,7 +41,11 @@ public class AgencyReviewServiceImpl implements AgencyReviewService {
     @Transactional
     @Override
     public AgencyReview save(AgencyReview agencyReview) {
-        return agencyReviewRepository.save(agencyReview);
+        AgencyReview response = agencyReviewRepository.save(agencyReview);
+        Agency average = agencyRepository.getById(agencyReview.getAgency().getId());
+        average.setScore(agencyReviewRepository.calculateAverageProfessionalismScoreByAgencyId(average.getId()));
+        agencyRepository.save(average);
+        return response;
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package com.go2climb.app.tourist.service;
 
+import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import com.go2climb.app.tourist.domain.persistence.TouristRepository;
 import com.go2climb.app.tourist.domain.service.TouristService;
@@ -14,6 +15,9 @@ import java.util.Optional;
 public class TouristServiceImpl implements TouristService {
     @Autowired
     private TouristRepository touristRepository;
+
+    @Autowired
+    private AgencyRepository agencyRepository;
 
     @Transactional(readOnly = true)
     @Override
