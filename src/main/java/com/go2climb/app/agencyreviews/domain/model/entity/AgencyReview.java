@@ -7,6 +7,7 @@ import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "agencies_reviews")
 @JsonInclude(JsonInclude.Include.ALWAYS)
+@AllArgsConstructor
 public class AgencyReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

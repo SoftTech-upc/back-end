@@ -9,6 +9,7 @@ import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "tourists")
+@AllArgsConstructor
 public class Tourist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

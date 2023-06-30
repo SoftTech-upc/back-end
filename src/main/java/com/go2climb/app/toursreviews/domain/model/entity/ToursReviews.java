@@ -5,6 +5,7 @@ import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +15,7 @@ import java.util.Date;
 @Getter
 @Table(name ="tours_reviews" )
 @Entity
+@AllArgsConstructor
 public class ToursReviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

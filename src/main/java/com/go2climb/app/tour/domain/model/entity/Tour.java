@@ -9,6 +9,7 @@ import com.go2climb.app.reservation.domain.model.entity.Reservation;
 import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +24,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "tours")
+@AllArgsConstructor
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

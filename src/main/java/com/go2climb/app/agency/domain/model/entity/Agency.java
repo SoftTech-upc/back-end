@@ -6,6 +6,7 @@ import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "agencies")
+@AllArgsConstructor
 public class Agency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,6 +5,7 @@ import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "activities")
+@AllArgsConstructor
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
