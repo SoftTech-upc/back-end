@@ -52,4 +52,10 @@ public class TourServiceImpl implements TourService {
         }
         return false;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Tour> getAllOffer() {
+        return tourRepository.findOfferTours();
+    }
 }

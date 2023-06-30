@@ -30,6 +30,11 @@ public class TourController {
         return tourService.getAll();
     }
 
+    @GetMapping("offer")
+    public List<Tour> getAllOffer() {
+        return tourService.getAllOffer();
+    }
+
     @GetMapping("{id}")
     public Tour getById(@PathVariable Integer id) {
         return tourService.getById(id).get();

@@ -11,4 +11,6 @@ public interface TourService {
     Tour save(Tour tour);
     Tour update(Tour tour);
     boolean deleteById(Integer id);
+
+    List<Tour> getAllOffer();
 }
