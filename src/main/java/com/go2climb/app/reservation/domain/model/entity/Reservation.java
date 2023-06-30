@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 @Entity
 @Table(name = "reservations")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Reservation {
 
     @Id

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "agencies")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Agency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

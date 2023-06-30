@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 @Table(name ="tours_reviews" )
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class ToursReviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

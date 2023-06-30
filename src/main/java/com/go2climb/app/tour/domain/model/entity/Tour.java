@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,6 +26,7 @@ import java.util.List;
 @Entity
 @Table(name = "tours")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

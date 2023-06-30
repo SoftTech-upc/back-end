@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "agencies_reviews")
-@JsonInclude(JsonInclude.Include.ALWAYS)
+@NoArgsConstructor
 @AllArgsConstructor
 public class AgencyReview {
     @Id
