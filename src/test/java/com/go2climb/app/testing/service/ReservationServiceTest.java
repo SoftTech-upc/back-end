@@ -104,8 +104,8 @@ public class ReservationServiceTest {
     public void testDeleteById() {
         Date now = new Date();
         // Simular el comportamiento del repositorio
-        Reservation reservation = new Reservation(1, 12, 1.2f, now, "Status",tour, tourist);
-        Mockito.when(reservationRepository.findById(1)).thenReturn(Optional.of(reservation));
+        Reservation reservation = new Reservation(1, 12, 1.2f, now, "Status", tour, tourist);
+        Mockito.when(reservationRepository.existsById(1)).thenReturn(true);
         Mockito.doNothing().when(reservationRepository).deleteById(1);
 
         // Ejecutar el método a probar
@@ -113,7 +113,8 @@ public class ReservationServiceTest {
 
         // Verificar el resultado y las interacciones con el repositorio
         Assertions.assertTrue(result);
-        Mockito.verify(reservationRepository).findById(1);
-        Mockito.verify(reservationRepository).deleteById(1);
+        Mockito.verify(reservationRepository, Mockito.times(1)).existsById(1);
+        Mockito.verify(reservationRepository, Mockito.times(1)).deleteById(1);
     }
+
 }

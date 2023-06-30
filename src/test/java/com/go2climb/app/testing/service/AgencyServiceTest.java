@@ -9,6 +9,7 @@ import com.go2climb.app.agencyreviews.service.AgencyReviewServiceImpl;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,6 +40,10 @@ public class AgencyServiceTest {
 
     @Mock
     private List<Tour> tours;
+
+    @Mock
+    private AgencyReviewRepository agencyReviewRepository;
+
 
     @Test
     public void testGetAll() {
@@ -89,15 +94,27 @@ public class AgencyServiceTest {
 
     @Test
     public void testUpdate() {
+        when(agencyReviewRepository.calculateAverageProfessionalismScoreByAgencyId(Mockito.anyInt()))
+                .thenReturn(4.5); // Puntaje promedio simulado
+        // Datos de prueba
         Agency agency = new Agency(1, "Agency 1", "email 1", "999999999", "Descripción 1", "location 1", "123456789", "photo 1", 4.0, agencyReviews, tours, "12345", "agency");
+        agency.setId(1);
 
-        Mockito.when(agencyRepository.save(agency)).thenReturn(agency);
+        // Configurar el comportamiento del mock del repositorio
+        when(agencyRepository.save(Mockito.any(Agency.class)))
+                .thenReturn(agency); // Devolver la misma agencia
 
+        // Llamar al método a probar
         Agency result = agencyService.update(agency);
 
-        Assertions.assertEquals(agency, result);
+        // Verificar el resultado
+        Assertions.assertEquals(4.5, result.getScore()); // Verificar que se haya establecido el puntaje promedio
 
-        Mockito.verify(agencyRepository, times(1)).save(agency);
+        Mockito.verify(agencyReviewRepository, Mockito.times(1))
+                .calculateAverageProfessionalismScoreByAgencyId(agency.getId()); // Verificar llamada al método del repositorio
+
+        Mockito.verify(agencyRepository, Mockito.times(1))
+                .save(agency); // Verificar llamada al método del repositorio
     }
 
     @Test

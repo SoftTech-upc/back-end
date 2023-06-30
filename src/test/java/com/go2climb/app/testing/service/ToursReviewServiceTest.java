@@ -1,6 +1,7 @@
 package com.go2climb.app.testing.service;
 
 import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tour.domain.persistence.TourRepository;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import com.go2climb.app.toursreviews.domain.persistence.ToursReviewsRepository;
@@ -34,6 +35,9 @@ public class ToursReviewServiceTest {
 
     @Mock
     private Tour tour;
+
+    @Mock
+    private TourRepository tourRepository;
 
     @Test
     public void testGetAll() {
@@ -72,18 +76,20 @@ public class ToursReviewServiceTest {
     @Test
     public void testSave() {
         Date now = new Date();
-        ToursReviews expected = new ToursReviews(1L, now, "Comment 1", 3.0, tourist, tour);
         ToursReviews toursReviews = new ToursReviews(1L, now, "Comment 1", 3.0, tourist, tour);
 
-        Mockito.when( toursReviewsRepository.save(Mockito.any(ToursReviews.class)) )
-                .thenReturn( toursReviews );
+        Mockito.when(toursReviewsRepository.save(Mockito.any(ToursReviews.class))).thenReturn(toursReviews);
+        Mockito.when(tourRepository.getById(Mockito.anyInt())).thenReturn(tour);
 
-        ToursReviews actual = toursReviewsService.Save(new ToursReviews(1L, now, "Comment 1", 3.0, tourist, tour));
+        ToursReviews savedReviews = toursReviewsService.Save(toursReviews);
 
-        Assertions.assertEquals(expected.getId(),actual.getId());
-        Assertions.assertEquals(expected.getDate(),actual.getDate());
-        Assertions.assertEquals(expected.getComment(),actual.getComment());
-        Assertions.assertEquals(expected.getScore(),actual.getScore());
+        Assertions.assertEquals(toursReviews.getId(), savedReviews.getId());
+        Assertions.assertEquals(toursReviews.getComment(), savedReviews.getComment());
+        Assertions.assertEquals(toursReviews.getScore(), savedReviews.getScore());
+
+        Mockito.verify(toursReviewsRepository, Mockito.times(1)).save(Mockito.any(ToursReviews.class));
+        Mockito.verify(tourRepository, Mockito.times(1)).getById(Mockito.anyInt());
+        Mockito.verify(tourRepository, Mockito.times(1)).save(Mockito.any(Tour.class));
     }
 
     @Test

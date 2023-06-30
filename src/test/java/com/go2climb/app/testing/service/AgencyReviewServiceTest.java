@@ -4,6 +4,7 @@ import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.activity.domain.persistence.ActivityRepository;
 import com.go2climb.app.activity.service.ActivityServiceImpl;
 import com.go2climb.app.agency.domain.model.entity.Agency;
+import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
 import com.go2climb.app.agencyreviews.domain.persistence.AgencyReviewRepository;
 import com.go2climb.app.agencyreviews.service.AgencyReviewServiceImpl;
@@ -16,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class AgencyReviewServiceTest {
     @InjectMocks
@@ -35,10 +38,16 @@ public class AgencyReviewServiceTest {
     private AgencyReviewRepository agencyReviewRepository;
 
     @Mock
+    private AgencyRepository agencyRepository;
+
+    @Mock
     private Agency agency;
 
     @Mock
     private Tourist tourist;
+
+    @Mock
+    private AgencyReview agencyReview;
 
     @Test
     public void testGetAll() {
@@ -74,24 +83,29 @@ public class AgencyReviewServiceTest {
 
     @Test
     public void testSave() {
+        // Datos de prueba
         LocalDateTime now = LocalDateTime.now();
-        AgencyReview expected = new AgencyReview(1, now, "Comment 1", 3.0f, 4.0f, 5, 2, agency, tourist);
         AgencyReview agencyReview = new AgencyReview(1, now, "Comment 1", 3.0f, 4.0f, 5, 2, agency, tourist);
 
-        Mockito.when( agencyReviewRepository.save(Mockito.any(AgencyReview.class)) )
-                .thenReturn( agencyReview );
+        // Configurar el comportamiento del mock del repositorio para el método save
+        when(agencyReviewRepository.save(any(AgencyReview.class))).thenReturn(agencyReview);
 
-        AgencyReview actual = agencyReviewService.save(new AgencyReview(1, LocalDateTime.now(), "Comment 1", 3.0f, 4.0f, 5, 2, agency, tourist));
+        // Configurar el comportamiento del mock del repositorio para el método calculateAverageProfessionalismScoreByAgencyId
+        when(agencyReviewRepository.calculateAverageProfessionalismScoreByAgencyId(anyInt())).thenReturn(4.5);
 
-        Assertions.assertEquals(expected.getId(),actual.getId());
-        Assertions.assertEquals(expected.getCreatedAt(),actual.getCreatedAt());
-        Assertions.assertEquals(expected.getComment(),actual.getComment());
-        Assertions.assertEquals(expected.getProfessionalismScore(),actual.getProfessionalismScore());
-        Assertions.assertEquals(expected.getSecurityScore(),actual.getSecurityScore());
-        Assertions.assertEquals(expected.getQualityScore(),actual.getQualityScore());
-        Assertions.assertEquals(expected.getCostScore(),actual.getCostScore());
-        Assertions.assertEquals(expected.getAgency(),actual.getAgency());
-        Assertions.assertEquals(expected.getTourist(),actual.getTourist());
+        // Configurar el comportamiento del mock del repositorio para el método getById
+        when(agencyRepository.getById(anyInt())).thenReturn(agency);
+
+        // Llamar al método a probar
+        AgencyReview response = agencyReviewService.save(agencyReview);
+
+        // Verificar el resultado
+        Assertions.assertEquals(agencyReview, response);
+
+        // Verificar las interacciones con los mocks del repositorio
+        verify(agencyReviewRepository, times(1)).save(agencyReview);
+        verify(agencyReviewRepository, times(1)).calculateAverageProfessionalismScoreByAgencyId(agency.getId());
+        verify(agencyRepository, times(1)).save(agency);
     }
 
     @Test
@@ -111,16 +125,17 @@ public class AgencyReviewServiceTest {
     public void testDeleteById() {
         // Simular el comportamiento del repositorio
         AgencyReview agencyReview = new AgencyReview(1, LocalDateTime.now(), "Comentario", 3.0f, 4.0f, 5, 2, agency, tourist);
-        Mockito.when(agencyReviewRepository.findById(1)).thenReturn(Optional.of(agencyReview));
-        Mockito.doNothing().when(agencyReviewRepository).deleteById(1);
+        when(agencyReviewRepository.existsById(1)).thenReturn(true);
+        doNothing().when(agencyReviewRepository).deleteById(1);
 
         // Ejecutar el método a probar
         boolean result = agencyReviewService.deleteById(1);
 
         // Verificar el resultado y las interacciones con el repositorio
-        Assertions.assertTrue(result);
-        Mockito.verify(agencyReviewRepository).findById(1);
-        Mockito.verify(agencyReviewRepository).deleteById(1);
+        assertTrue(result);
+        verify(agencyReviewRepository).existsById(1);
+        verify(agencyReviewRepository).deleteById(1);
     }
+
 
 }
