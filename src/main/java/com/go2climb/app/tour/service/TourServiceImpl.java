@@ -58,4 +58,9 @@ public class TourServiceImpl implements TourService {
     public List<Tour> getAllOffer() {
         return tourRepository.findOfferTours();
     }
+
+    @Override
+    public List<Tour> getOrderScoreDesc() {
+        return tourRepository.findAllByOrderByScoreDesc();
+    }
 }

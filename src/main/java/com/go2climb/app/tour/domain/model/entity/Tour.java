@@ -33,7 +33,7 @@ public class Tour {
     @Min(0)
     @Max(5)
     @Column(name = "score", nullable = false)
-    private Float score = 0f;
+    private Double score = 0.0;
 
     @NotNull
     @Min(0)

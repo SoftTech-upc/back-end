@@ -1,6 +1,8 @@
 package com.go2climb.app.toursreviews.service;
 
 
+import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tour.domain.persistence.TourRepository;
 import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import com.go2climb.app.toursreviews.domain.persistence.ToursReviewsRepository;
 import com.go2climb.app.toursreviews.domain.service.ToursReviewsService;
@@ -16,6 +18,9 @@ public class ToursReviewsServiceImpl implements ToursReviewsService {
 
     @Autowired
    private ToursReviewsRepository toursReviewsRepository;
+
+    @Autowired
+    private TourRepository tourRepository;
     @Transactional(readOnly = true)
     @Override
     public List<ToursReviews> getAll() {
@@ -34,8 +39,11 @@ public class ToursReviewsServiceImpl implements ToursReviewsService {
     @Transactional
     @Override
     public ToursReviews Save(ToursReviews toursReviews) {
-
-        return toursReviewsRepository.save(toursReviews);
+        ToursReviews toursReviews1 = toursReviewsRepository.save(toursReviews);
+        Tour tour = tourRepository.getById(toursReviews.getTour().getId());
+        tour.setScore(toursReviewsRepository.calculateAverageScoreByTourId(tour.getId()));
+        tourRepository.save(tour);
+        return toursReviews1;
     }
     @Transactional
     @Override

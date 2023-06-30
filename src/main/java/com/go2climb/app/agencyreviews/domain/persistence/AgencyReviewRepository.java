@@ -17,6 +17,10 @@ import java.util.List;
 public interface AgencyReviewRepository extends JpaRepository<AgencyReview, Integer> {
     List<AgencyReview> findBySecurityScore(Integer securityScore);
 
+//    @Query("SELECT AVG(ar.professionalismScore) FROM AgencyReview ar WHERE ar.agency.id = :agencyId")
+//    Float calculateAverageProfessionalismScoreByAgencyId(@Param("agencyId") Integer agencyId);
+
     @Query("SELECT AVG(ar.professionalismScore) FROM AgencyReview ar WHERE ar.agency.id = :agencyId")
-    Float calculateAverageProfessionalismScoreByAgencyId(@Param("agencyId") Integer agencyId);
+    Double calculateAverageProfessionalismScoreByAgencyId(@Param("agencyId") Integer agencyId);
+
 }

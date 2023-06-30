@@ -35,6 +35,11 @@ public class TourController {
         return tourService.getAllOffer();
     }
 
+    @GetMapping("score")
+    public List<Tour> getOrderScoreDesc() {
+        return tourService.getOrderScoreDesc();
+    }
+
     @GetMapping("{id}")
     public Tour getById(@PathVariable Integer id) {
         return tourService.getById(id).get();

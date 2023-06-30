@@ -57,7 +57,7 @@ public class Agency {
 
 
     @Column(name = "score", nullable = false)
-    private Float score = 0f;
+    private Double score = 0.0;
 
     @JsonIgnoreProperties({"agency"})
     @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
