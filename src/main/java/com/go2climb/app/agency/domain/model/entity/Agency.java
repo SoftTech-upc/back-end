@@ -71,4 +71,7 @@ public class Agency {
     @NotNull
     @Column(name = "password", length = 300, nullable = false)
     private String password;
+
+    @Column(name = "type")
+    private String type="Agency";
 }

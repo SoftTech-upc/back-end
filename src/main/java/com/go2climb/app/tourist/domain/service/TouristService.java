@@ -11,4 +11,6 @@ public interface TouristService {
     Tourist save(Tourist tourist);
     Tourist update(Tourist tourist);
     boolean deleteById(Integer id);
+
+    Optional<Tourist> getByEmail(String id);
 }

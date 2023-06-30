@@ -25,17 +25,17 @@ public class Tourist {
 
     @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "name", length = 300, nullable = false)
+    @Column(name = "name", length = 300, nullable = false, unique = true)
     private String name;
 
     @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "last_name", length = 300, nullable = false)
+    @Column(name = "last_name", length = 300, nullable = false, unique = true)
     private String lastName;
 
     @Size(min = 1, max = 300)
     @NotNull
-    @Column(name = "email", length = 300, nullable = false)
+    @Column(name = "email", length = 300, nullable = false, unique = true)
     private String email;
 
     @Size(min = 9, max = 9)
@@ -64,4 +64,7 @@ public class Tourist {
     @JsonIgnoreProperties({"tourist"})
     @OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL)
     private List<ToursReviews> tourReviews;
+
+    @Column(name = "type")
+    private String type="Tourist";
 }

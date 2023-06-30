@@ -3,6 +3,7 @@ package com.go2climb.app.agency.service;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.agency.domain.service.AgencyService;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,5 +53,15 @@ public class AgencyServiceImpl implements AgencyService {
             return true;
         }
         return false;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Agency> getByEmail(String name) {
+        if (agencyRepository.findOneByEmail(name).isPresent()) {
+            return agencyRepository.findOneByEmail(name);
+        } else {
+            return Optional.empty();
+        }
     }
 }

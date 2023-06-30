@@ -6,6 +6,7 @@ import com.go2climb.app.agency.mapping.AgencyMapper;
 import com.go2climb.app.agency.resource.AgencyResource;
 import com.go2climb.app.agency.resource.CreateAgencyResource;
 import com.go2climb.app.agency.resource.UpdateAgencyResource;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,11 @@ public class AgencyController {
     @GetMapping("{id}")
     public Agency getById(@PathVariable Integer id) {
         return agencyService.getById(id).get();
+    }
+
+    @GetMapping("email/{email}")
+    public Agency getByEmail(@PathVariable String email) {
+        return agencyService.getByEmail(email).get();
     }
 
     @PutMapping("{id}")

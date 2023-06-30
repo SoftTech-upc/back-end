@@ -31,6 +31,16 @@ public class TouristServiceImpl implements TouristService {
         }
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Tourist> getByEmail(String name) {
+        if (touristRepository.findOneByEmail(name).isPresent()) {
+            return touristRepository.findOneByEmail(name);
+        } else {
+            return Optional.empty();
+        }
+    }
+
     @Transactional
     @Override
     public Tourist save(Tourist tourist) {

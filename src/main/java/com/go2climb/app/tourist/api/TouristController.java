@@ -38,6 +38,11 @@ public class TouristController {
         return touristService.getById(id).get();
     }
 
+    @GetMapping("email/{email}")
+    public Tourist getByEmail(@PathVariable String email) {
+        return touristService.getByEmail(email).get();
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<TouristResource> update(@PathVariable Integer id, @RequestBody UpdateTouristResource resource) {
         if(id.equals(resource.getId())) {
