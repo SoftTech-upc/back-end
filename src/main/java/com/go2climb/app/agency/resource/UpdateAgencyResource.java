@@ -38,9 +38,6 @@ public class UpdateAgencyResource {
     @NotNull
     private String location;
 
-    @Size(min = 0, max = 5)
-    private Float score;
-
     @Size(min = 11, max = 11)
     @NotNull
     private String ruc;

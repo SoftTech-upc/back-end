@@ -3,6 +3,8 @@ package com.go2climb.app.agency.service;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.agency.domain.service.AgencyService;
+import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
+import com.go2climb.app.agencyreviews.domain.persistence.AgencyReviewRepository;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class AgencyServiceImpl implements AgencyService {
 
     @Autowired
     private AgencyRepository agencyRepository;
+
+    @Autowired
+    private AgencyReviewRepository agencyReviewRepository;
 
     @Transactional(readOnly = true)
     @Override
@@ -42,6 +47,7 @@ public class AgencyServiceImpl implements AgencyService {
     @Transactional
     @Override
     public Agency update(Agency agency) {
+        agency.setScore(agencyReviewRepository.calculateAverageProfessionalismScoreByAgencyId(agency.getId()));
         return agencyRepository.save(agency);
     }
 
