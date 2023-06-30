@@ -11,8 +11,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -49,12 +52,16 @@ public class Tour {
     @Column(name = "location", length = 200, nullable = false)
     private String location;
 
-    @Past
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "creation_date", nullable = false)
-    private Date creationDate;
+
+    @CreationTimestamp
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDateTime creationDate;
+
+    @PreUpdate
+    protected void onUpdate() {
+        creationDate = LocalDateTime.now();
+    }
 
     @NotNull
     @Size(min = 1, max = 500)

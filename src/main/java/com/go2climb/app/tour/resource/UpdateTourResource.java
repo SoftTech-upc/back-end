@@ -37,12 +37,6 @@ public class UpdateTourResource {
     @NotNull
     private String location;
 
-    @Past
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
-
     @NotNull
     @Size(min = 1, max = 500)
     @Column(name = "photo", length = 500)

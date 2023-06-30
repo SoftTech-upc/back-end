@@ -53,7 +53,6 @@ public class ToursReviewsServiceImpl implements ToursReviewsService {
     @Transactional
     @Override
     public boolean deleteById(Integer Id) {
-
        if(toursReviewsRepository.existsById(Id)){
            toursReviewsRepository.deleteById(Id);
            return true;
