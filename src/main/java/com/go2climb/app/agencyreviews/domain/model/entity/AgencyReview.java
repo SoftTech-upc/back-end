@@ -60,11 +60,11 @@ public class AgencyReview {
 
     @ManyToOne()
     @JoinColumn(name = "agency_id")
-    @JsonIgnoreProperties("reviews")
+    @JsonIgnoreProperties({"reviews", "tours"})
     private Agency agency;
 
     @ManyToOne()
     @JoinColumn(name = "tourist_id")
-    @JsonIgnoreProperties("agencyReviews")
+    @JsonIgnoreProperties({"agencyReviews", "tourReviews"})
     private Tourist tourist;
 }

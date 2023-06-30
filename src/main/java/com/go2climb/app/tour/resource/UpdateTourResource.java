@@ -54,4 +54,7 @@ public class UpdateTourResource {
 
     @NotNull
     private Boolean isOffer;
+
+    @NotNull
+    private Agency agency;
 }

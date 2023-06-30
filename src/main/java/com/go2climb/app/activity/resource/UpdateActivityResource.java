@@ -1,5 +1,6 @@
 package com.go2climb.app.activity.resource;
 
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,4 +25,7 @@ public class UpdateActivityResource {
     @Size(min = 1, max = 100)
     @NotNull
     private String description;
+
+    @NotNull
+    private Tour tour;
 }

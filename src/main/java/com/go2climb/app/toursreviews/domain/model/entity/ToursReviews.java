@@ -34,12 +34,12 @@ public class ToursReviews {
     @Column(name="score")
     private Long score;
 
-    @JsonIgnoreProperties({"tourReviews"})
+    @JsonIgnoreProperties({"tourReviews", "agencyReviews"})
     @ManyToOne()
     @JoinColumn(name = "tourist_id")
     private Tourist tourist;
 
-    @JsonIgnoreProperties({"reviews"})
+    @JsonIgnoreProperties({"reviews", "reservations"})
     @ManyToOne()
     @JoinColumn(name = "tour_id")
     private Tour tour;
