@@ -19,23 +19,23 @@ import java.util.List;
 public class CreateAgencyResource {
 
     @Size(min = 1, max = 30)
-    //@NotNull
+    @NotNull
     private String name;
 
     @Size(min = 1, max = 100)
-    //@NotNull
+    @NotNull
     private String email;
 
     @Size(min = 9, max = 9)
-    //@NotNull
+    @NotNull
     private String phoneNumber;
 
     @Size(min = 1, max = 200)
-    //@NotNull
+    @NotNull
     private String description;
 
     @Size(min = 1, max = 200)
-    //@NotNull
+    @NotNull
     private String location;
 
     @Size(min = 0, max = 5)
@@ -48,5 +48,7 @@ public class CreateAgencyResource {
     @Size(min = 1, max = 500)
     private String photo;
 
-
+    @Size(min = 1, max = 25)
+    @NotNull
+    private String password;
 }

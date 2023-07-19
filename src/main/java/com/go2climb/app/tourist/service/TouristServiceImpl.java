@@ -1,7 +1,6 @@
 package com.go2climb.app.tourist.service;
 
-import com.go2climb.app.shared.exception.ResourceNotFoundException;
-import com.go2climb.app.shared.exception.ResourceValidationException;
+import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import com.go2climb.app.tourist.domain.persistence.TouristRepository;
 import com.go2climb.app.tourist.domain.service.TouristService;
@@ -23,7 +22,7 @@ public class TouristServiceImpl implements TouristService {
     private TouristRepository touristRepository;
 
     @Autowired
-    private Validator validator;
+    private AgencyRepository agencyRepository;
 
     @Transactional(readOnly = true)
     @Override
@@ -38,6 +37,16 @@ public class TouristServiceImpl implements TouristService {
             return touristRepository.findById(id);
         } else {
             throw new ResourceNotFoundException("Tourist", id);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Tourist> getByEmail(String name) {
+        if (touristRepository.findOneByEmail(name).isPresent()) {
+            return touristRepository.findOneByEmail(name);
+        } else {
+            return Optional.empty();
         }
     }
 

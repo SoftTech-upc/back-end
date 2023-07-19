@@ -1,8 +1,12 @@
 package com.go2climb.app.reservation.service;
 
+import com.go2climb.app.agency.domain.model.entity.Agency;
+import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
 import com.go2climb.app.reservation.domain.model.entity.Reservation;
 import com.go2climb.app.reservation.domain.persistence.ReservationRepository;
 import com.go2climb.app.reservation.domain.service.ReservationService;
+import com.go2climb.app.tour.domain.model.entity.Tour;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
     return reservationRepository.save(reservation);
   }
 
-  @Transactional
+ @Transactional
   @Override
   public boolean deleteById(Integer id) {
     if (reservationRepository.existsById(id)) {
@@ -51,5 +55,5 @@ public class ReservationServiceImpl implements ReservationService {
       return true;
     }
     return false;
-  }
+ }
 }

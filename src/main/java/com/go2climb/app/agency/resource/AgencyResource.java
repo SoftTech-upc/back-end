@@ -21,4 +21,6 @@ public class AgencyResource {
     private String ruc;
     private String photo;
     private Float score;
+    private String password;
+
 }

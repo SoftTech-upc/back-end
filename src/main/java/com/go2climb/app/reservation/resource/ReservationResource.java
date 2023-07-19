@@ -12,14 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationResource {
-
   private Integer id;
   private Integer amount;
   private Float price;
   private Date scheduledDate;
   private String status;
-
-  private Tour tour;
-
-  private Tourist tourist;
 }

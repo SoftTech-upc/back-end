@@ -1,21 +1,23 @@
 package com.go2climb.app.toursreviews.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Setter
 @Getter
-@Table(name ="tours_reviews" )//la numenclatura no debe ir mayusculas
+@Table(name ="tours_reviews" )
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class ToursReviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,29 +28,23 @@ public class ToursReviews {
     @Temporal(TemporalType.DATE)
     private Date date;
     @NotNull
-    @NotBlank // no para numericos
+    @NotBlank
     @Size(min =1,max = 1000)
     @Column(name="comment",length = 1000,nullable = false)
     private String comment;
+    @Min(0)
+    @Max(5)
     @NotNull
     @Column(name="score")
-    private Long score;
+    private Double score;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"tourReviews", "agencyReviews"})
+    @ManyToOne()
     @JoinColumn(name = "tourist_id")
     private Tourist tourist;
 
-    // Relationships
-    //@ManyToOne(fetch = FetchType.EAGER, optional = false)
-    //@JoinColumn(name  = "tourists_id", nullable = false) // no debe guardar un objeto sin Tourists
-    //@JsonIgnore// solo debe mostrar criterio
-   // private Tourists tourists;
-    //cuando yo creo  un objeto en la Criterion automaticamente va recuperar a que Tour
-    // le pertenece
-
-
-
-
-
+    @JsonIgnoreProperties({"reviews", "reservations"})
+    @ManyToOne()
+    @JoinColumn(name = "tour_id")
+    private Tour tour;
 }

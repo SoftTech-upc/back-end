@@ -47,4 +47,8 @@ public class UpdateAgencyResource {
 
     @Size(min = 1, max = 500)
     private String photo;
+
+    @Size(min = 1, max = 25)
+    @NotNull
+    private String password;
 }

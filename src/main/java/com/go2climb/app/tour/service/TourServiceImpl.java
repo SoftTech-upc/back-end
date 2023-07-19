@@ -66,4 +66,21 @@ public class TourServiceImpl implements TourService {
         }
         return false;
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Tour> getAllOffer() {
+        return tourRepository.findOfferTours();
+    }
+
+    @Override
+    public List<Tour> getOrderScoreDesc() {
+        return tourRepository.findAllByOrderByScoreDesc();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Tour> getOrderDateDesc() {
+        return tourRepository.findAllByOrderByCreationDateDesc();
+    }
 }

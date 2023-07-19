@@ -1,6 +1,5 @@
 package com.go2climb.app.toursreviews.mapping;
 
-
 import com.go2climb.app.shared.mapping.EnhancedModelMapper;
 import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import com.go2climb.app.toursreviews.resource.CreateToursReviewsResource;

@@ -3,11 +3,9 @@ package com.go2climb.app.agency.service;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.agency.domain.persistence.AgencyRepository;
 import com.go2climb.app.agency.domain.service.AgencyService;
-import com.go2climb.app.shared.exception.ResourceNotFoundException;
-import com.go2climb.app.shared.exception.ResourceValidationException;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
-import java.util.Set;
+import com.go2climb.app.agencyreviews.domain.model.entity.AgencyReview;
+import com.go2climb.app.agencyreviews.domain.persistence.AgencyReviewRepository;
+import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +22,7 @@ public class AgencyServiceImpl implements AgencyService {
     private AgencyRepository agencyRepository;
 
     @Autowired
-    private Validator validator;
+    private AgencyReviewRepository agencyReviewRepository;
 
     @Transactional(readOnly = true)
     @Override
@@ -55,6 +53,7 @@ public class AgencyServiceImpl implements AgencyService {
     @Transactional
     @Override
     public Agency update(Agency agency) {
+        agency.setScore(agencyReviewRepository.calculateAverageProfessionalismScoreByAgencyId(agency.getId()));
         return agencyRepository.save(agency);
     }
 
@@ -66,5 +65,15 @@ public class AgencyServiceImpl implements AgencyService {
             return true;
         }
         return false;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Agency> getByEmail(String name) {
+        if (agencyRepository.findOneByEmail(name).isPresent()) {
+            return agencyRepository.findOneByEmail(name);
+        } else {
+            return Optional.empty();
+        }
     }
 }

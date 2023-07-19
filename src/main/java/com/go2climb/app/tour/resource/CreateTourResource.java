@@ -1,13 +1,14 @@
 package com.go2climb.app.tour.resource;
 
-import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -32,11 +33,9 @@ public class CreateTourResource {
     @NotNull
     private String location;
 
-    @Past
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    @CreationTimestamp
+    @CreatedDate
+    private LocalDateTime creationDate;
 
     @NotNull
     @Size(min = 1, max = 500)

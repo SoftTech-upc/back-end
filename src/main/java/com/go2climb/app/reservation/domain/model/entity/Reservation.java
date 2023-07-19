@@ -1,10 +1,14 @@
 package com.go2climb.app.reservation.domain.model.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.go2climb.app.tour.domain.model.entity.Tour;
 import com.go2climb.app.tourist.domain.model.entity.Tourist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +18,8 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "reservations")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reservation {
 
     @Id
@@ -42,13 +48,13 @@ public class Reservation {
     @Column(name = "status", length = 20, nullable = false)
     private String status;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"reservations", "reviews"})
+    @ManyToOne()
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"reservations", "agencyReviews", "toursReviews"})
+    @ManyToOne()
     @JoinColumn(name = "tourist_id")
     private Tourist tourist;
 }

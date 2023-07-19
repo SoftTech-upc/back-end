@@ -1,16 +1,23 @@
 package com.go2climb.app.tour.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.go2climb.app.activity.domain.model.entity.Activity;
 import com.go2climb.app.agency.domain.model.entity.Agency;
 import com.go2climb.app.reservation.domain.model.entity.Reservation;
+import com.go2climb.app.toursreviews.domain.model.entity.ToursReviews;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.swing.text.View;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +25,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "tours")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +40,7 @@ public class Tour {
     @Min(0)
     @Max(5)
     @Column(name = "score", nullable = false)
-    private Float score = 0f;
+    private Double score = 0.0;
 
     @NotNull
     @Min(0)
@@ -47,12 +56,15 @@ public class Tour {
     @Column(name = "location", length = 200, nullable = false)
     private String location;
 
-    @Past
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    @Column(name = "creation_date", nullable = false)
-    private Date creationDate;
+    @CreationTimestamp
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDateTime creationDate;
+
+    @PreUpdate
+    protected void onUpdate() {
+        creationDate = LocalDateTime.now();
+    }
 
     @NotNull
     @Size(min = 1, max = 500)
@@ -68,16 +80,20 @@ public class Tour {
     @Column(name = "is_offer", nullable = false)
     private Boolean isOffer;
 
-    @JsonProperty()
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"tours"})
+    @ManyToOne()
     @JoinColumn(name = "agency_id")
     private Agency agency;
 
-    @OneToMany(mappedBy = "tour")
+    @JsonIgnoreProperties({"tour"})
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<Activity> activities;
 
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("tour")
-    @JsonIgnore
-    private List<Reservation> reservation;
+    @JsonIgnoreProperties({"tour"})
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
+
+    @JsonIgnoreProperties({"tour"})
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<ToursReviews> reviews;
 }
