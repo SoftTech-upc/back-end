@@ -83,7 +83,6 @@ public class Tour {
     @JsonIgnoreProperties({"tours"})
     @ManyToOne()
     @JoinColumn(name = "agency_id")
-//    @JsonBackReference
     private Agency agency;
 
     @JsonIgnoreProperties({"tour"})
@@ -92,7 +91,6 @@ public class Tour {
 
     @JsonIgnoreProperties({"tour"})
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<Reservation> reservations;
 
     @JsonIgnoreProperties({"tour"})

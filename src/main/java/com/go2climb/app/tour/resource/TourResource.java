@@ -26,4 +26,5 @@ public class TourResource {
     private String photo;
     private String description;
     private Boolean isOffer;
+    private Agency agency;
 }

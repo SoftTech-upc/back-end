@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static com.go2climb.app.shared.constant.Constant.AGENCY_ENTITY;
+
 @Service
 public class AgencyServiceImpl implements AgencyService {
 
@@ -34,13 +36,17 @@ public class AgencyServiceImpl implements AgencyService {
         if (agencyRepository.existsById(id)) {
             return agencyRepository.findById(id);
         } else {
-            return Optional.empty();
+            throw new ResourceNotFoundException("Agency", id);
         }
     }
 
     @Transactional
     @Override
     public Agency save(Agency agency) {
+        Set<ConstraintViolation<Agency>> violations = validator.validate(agency);
+        if(!violations.isEmpty()) {
+            throw new ResourceValidationException(AGENCY_ENTITY, violations);
+        }
         return agencyRepository.save(agency);
     }
 

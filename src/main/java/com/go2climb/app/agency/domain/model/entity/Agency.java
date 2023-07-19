@@ -65,12 +65,10 @@ public class Agency {
 
     @JsonIgnoreProperties({"agency"})
     @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<AgencyReview> reviews;
 
     @JsonIgnoreProperties({"agency"})
     @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<Tour> tours;
 
     @Size(min = 1, max = 300)
